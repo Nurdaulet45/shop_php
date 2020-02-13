@@ -21,7 +21,7 @@
 
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Последние товары</h2>
+                    <h2 class="title text-center">Shop/index Последние товары</h2>
                     <?php foreach ($productList as $productItem):?>
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
@@ -29,8 +29,8 @@
                                 <div class="productinfo text-center">
                                     <img src="/template/images/home/<?php echo $productItem['image'];?>" alt="" />
                                     <h2>$<?php echo $productItem['price']; ?></h2>
-                                    <p><?php echo $productItem['name']; ?></p>
-                                    <a href="/product/<?php echo $productItem['id'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
+                                    <p><a href="/product/<?php echo $productItem['id'];?>"><?php echo $productItem['name']; ?></a></p>
+                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                                 </div>
                                 <?php if ($productItem['is_new']):?>
                                     <img src="/template/images/home/new.png" class="new" alt=""/>
