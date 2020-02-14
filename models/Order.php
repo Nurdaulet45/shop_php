@@ -82,10 +82,7 @@ class Order
                 return 'Одобрен';
                 break;
             case '3':
-                return 'Доставляется';
-                break;
-            case '4':
-                return 'Закрыть';
+                return 'Удален';
                 break;
         }
     }

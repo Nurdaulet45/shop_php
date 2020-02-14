@@ -9,18 +9,18 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{asset('adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="/template/adminLte/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="/template/adminLte/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{asset('adminlte/bower_components/Ionicons/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="/template/adminLte/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('adminlte/dist/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="/template/adminLte/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="{{asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
+    <link rel="stylesheet" href="/template/adminLte/dist/css/skins/_all-skins.min.css">
 
-    <link rel="stylesheet" href="{{asset('css/my.css')}}">
+    <link rel="stylesheet" href="/template/css/my.css">
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -37,7 +37,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{route('blog.admin.index.index')}}" class="logo">
+        <a href="#" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -55,13 +55,13 @@
 
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+                            <img src="/template/adminLte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">{{ucfirst (Auth::user()->name) }} </span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                                <img src="/template/adminLte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                 <p>
                                     {{ ucfirst(Auth::user()->name) }}
                                 </p>
@@ -70,13 +70,13 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{route('blog.admin.users.edit',Auth::user()->id)}}" class="btn btn-default btn-flat">Профиль</a>
+                                    <a href="#" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <a href="#" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                                        class="btn btn-default btn-flat">Выход</a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="#" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
 
@@ -97,10 +97,10 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                    <img src="/template/adminLte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{ ucfirst (Auth::user()->name) }} </p>
+                    <p>AdminName </p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -193,44 +193,4 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-
         <main id="app">
-            @include('blog.admin.components.result_messages')
-            @yield('content')
-        </main>
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 3.0
-        </div>
-        <strong>Copyright &copy; 2019  All rights reserved.</strong>
-    </footer>
-
-    <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
-
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-
-<script>
-    var pathd = '{{PATH}}';
-</script>
-<!-- jQuery 3 -->
-<script src="{{asset('adminlte/bower_components/jquery/dist/jquery.min.js')}}"></script>
-
-<!-- Bootstrap 3.3.7 -->
-<script src="{{asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<!-- Validator -->
-<script src="{{asset('js/validator.js')}}"></script>
-<!-- Search -->
-
-<!-- AdminLTE App -->
-<script src="{{asset('adminlte/dist/js/adminlte.min.js')}}"></script>
-
-<!-- === = ===  -->
-
-</body>
-</html>

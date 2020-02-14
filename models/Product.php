@@ -43,7 +43,7 @@ class Product
 
     public static function getProductList(){
         $db = Db::getConnection();
-        $result = $db->query('SELECT id,name,price,code FROM product ORDER BY id ASC');
+        $result = $db->query('SELECT id,name,price,code,description FROM product ORDER BY id ASC');
         $productList = array();
         $i = 0;
         while ($row = $result->fetch()){
@@ -51,6 +51,7 @@ class Product
             $productList[$i]['name'] = $row['name'];
             $productList[$i]['price'] = $row['price'];
             $productList[$i]['code'] = $row['code'];
+            $productList[$i]['description'] = $row['description'];
             $i++;
         }
         return $productList;

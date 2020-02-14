@@ -5,7 +5,10 @@ class AdminController extends AdminBase
 {
     public function actionIndex(){
         self::checkAdmin();
-        require_once (ROOT . '/views/admin/index.php');
+        $lastOrders = Order::getOrdersList();
+        $lastProduct = Product::getProductList();
+
+        require_once(ROOT . '/views/adminLte/main/index.php');
         return true;
     }
 
