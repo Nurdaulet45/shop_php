@@ -14,6 +14,11 @@ class CartController
         return true;
     }
 
+    public function actionDelete($id){
+
+        Cart::deleteProduct($id);
+        header("Location: /cart");
+    }
 
     public function actionIndex(){
         $categories = array();
@@ -22,7 +27,6 @@ class CartController
         $productsInCart = false;
 
         $productsInCart = Cart::getProducts();
-        var_dump($productsInCart);
 
         if (isset($productsInCart)){
             $productsIds = array_keys($productsInCart);
@@ -34,86 +38,103 @@ class CartController
 
     }
 
-    public function actionCheckout(){
+    public function actionCheckout()
+    {
 
+        // Список категорий для левого меню
         $categories = array();
         $categories = Category::getCategoriesList();
 
+
+        // Статус успешного оформления заказа
         $result = false;
 
-        if ($_POST['submit']){
+
+        // Форма отправлена?
+        if (isset($_POST['submit'])) {
+            // Форма отправлена? - Да
+            // Считываем данные формы
             $userName = $_POST['userName'];
             $userPhone = $_POST['userPhone'];
             $userComment = $_POST['userComment'];
 
             // Валидация полей
             $errors = false;
-            if (!User::checkName($userName)){
-                $errors[] = 'Неправильное имя Неправильное телефон';
-            }
-            if (!User::checkPhone($userPhone)){
-                $errors[] = 'Неправильное телефон';
-            }
+            if (!User::checkName($userName))
+                $errors[] = 'Неправильное имя';
+            if (!User::checkPhone($userPhone))
+                $errors[] = 'Неправильный телефон';
 
-            if ($errors == false){
-                $productInCart = Cart::getProducts();
-
-                if (User::isGuest()){
+            // Форма заполнена корректно?
+            if ($errors == false) {
+                // Форма заполнена корректно? - Да
+                // Сохраняем заказ в базе данных
+                // Собираем информацию о заказе
+                $productsInCart = Cart::getProducts();
+                if (User::isGuest()) {
                     $userId = false;
                 } else {
                     $userId = User::checkLogged();
                 }
 
-                $result = Order::save($userName, $userPhone, $userComment, $userId, $productInCart);
+                // Сохраняем заказ в БД
+                $result = Order::save($userName, $userPhone, $userComment, $userId, $productsInCart);
 
-                if ($result){
-                    $adminEmail = 'a@a.ru';
-                    $message = 'https://shop/admin/orders';
-                    $subject = 'Новый заказ';
-                    mail($adminEmail, $message, $subject);
+                if ($result) {
+                    // Оповещаем администратора о новом заказе
+                    $adminEmail = 'php.start@mail.ru';
+                    $message = 'http://digital-mafia.net/admin/orders';
+                    $subject = 'Новый заказ!';
+                    mail($adminEmail, $subject, $message);
+
+                    // Очищаем корзину
                     Cart::clear();
+
                 }
             } else {
-                $productInCart = Cart::getProducts();
-                $productIds = array_keys($productInCart);
-                $products = Product::getProductById($productIds);
-                $totalPrice = Cart::getTotalPrice($productIds);
-                $totalQuantity = Cart::countItems();
-
-
-            }
-
-
-
-        } else {
-            //Получим данние из корзины
-            $productInCart = Cart::getProducts();
-
-            if ($productInCart == false){
-                return header("Location: /");
-            } else {
-                // Итоги: Общая стоимость и количества товара
-                $productIds = array_keys($productInCart);
-                $products = Product::getProductById($productIds);
+                // Форма заполнена корректно? - Нет
+                // Итоги: общая стоимость, количество товаров
+                $productsInCart = Cart::getProducts();
+                $productsIds = array_keys($productsInCart);
+                $products = Product::getProductByIds($productsIds);
                 $totalPrice = Cart::getTotalPrice($products);
                 $totalQuantity = Cart::countItems();
+            }
+        } else {
+            // Форма отправлена? - Нет
+            // Получием данные из корзины
+            $productsInCart = Cart::getProducts();
+
+            // В корзине есть товары?
+            if ($productsInCart == false) {
+                // В корзине есть товары? - Нет
+                // Отправляем пользователя на главную искать товары
+                header("Location: /");
+            } else {
+                // В корзине есть товары? - Да
+                // Итоги: общая стоимость, количество товаров
+                $productsIds = array_keys($productsInCart);
+                $products = Product::getProductByIds($productsIds);
+                $totalPrice = Cart::getTotalPrice($products);
+                $totalQuantity = Cart::countItems();
+
 
                 $userName = false;
                 $userPhone = false;
                 $userComment = false;
-                // пользователь авторизован?
-                if (User::isGuest()){
-//
-                } else {
+
+                // Пользователь авторизирован?
+                if (User::isGuest()) {
                     $userId = User::checkLogged();
-                    // Получаем инф о пользователе из БД по id
                     $user = User::getUserById($userId);
+                    // Подставляем в форму
                     $userName = $user['name'];
                 }
             }
-
         }
-        require_once ROOT.'/views/cart/checkout.php';
+
+        require_once(ROOT . '/views/cart/checkout.php');
+
         return true;
     }
 

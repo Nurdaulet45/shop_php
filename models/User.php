@@ -106,4 +106,42 @@ class User
         $result->bindParam(':password', $password, PDO::PARAM_STR);
         return $result->execute();
     }
+
+    public static function getUserList(){
+        $db = Db::getConnection();
+        $sql = 'SELECT id,name,email,role FROM user ORDER BY id ASC';
+
+        $result = $db->query($sql);
+        $usersList = array();
+        $i = 0;
+        while ($row = $result->fetch()){
+            $usersList[$i]['id'] = $row['id'];
+            $usersList[$i]['name'] = $row['name'];
+            $usersList[$i]['email'] = $row['email'];
+            $usersList[$i]['role'] = $row['role'];
+            $i++;
+        }
+
+        return $usersList;
+    }
+
+    public static function updateById($id, $options){
+        $db = Db::getConnection();
+        $sql = 'UPDATE user SET name = :name, email = :email, role = :role WHERE id = :id';
+        $result = $db->prepare($sql);
+        $result->bindParam('id', $id, PDO::PARAM_STR);
+        $result->bindParam('name', $options['name'], PDO::PARAM_STR);
+        $result->bindParam('email', $options['email'], PDO::PARAM_STR);
+        $result->bindParam('role', $options['role'], PDO::PARAM_STR);
+        return $result->execute();
+    }
+
+    public static function deleteById($id){
+        $db = Db::getConnection();
+        $sql = 'DELETE FROM user WHERE id = :id';
+        $result = $db->prepare($sql);
+        $result->bindParam('id', $id,PDO::PARAM_INT);
+        return $result->execute();
+    }
+
 }
