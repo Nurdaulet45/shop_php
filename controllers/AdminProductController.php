@@ -7,18 +7,15 @@ class AdminProductController extends AdminBase
         self::checkAdmin();
         $productList = Product::getProductList();
 
-        require_once (ROOT . '/views/admin/product/index.php');
+        require_once (ROOT . '/views/adminLte/product/index.php');
         return true;
     }
 
     public function actionDelete($id){
         self::checkAdmin();
-        if (isset($_POST['submit'])){
             Product::deleteProductById($id);
             header("Location: /admin/product");
-
-        }
-        require_once (ROOT . "/views/admin/product/delete.php");
+        require_once (ROOT . "/views/adminLte/product/delete.php");
         return true;
     }
 
@@ -56,7 +53,7 @@ class AdminProductController extends AdminBase
                 header("Location: '/admin/product'");
             }
         }
-        require_once (ROOT . '/views/admin/product/create.php');
+        require_once (ROOT . '/views/adminLte/product/create.php');
         return true;
     }
 
@@ -90,7 +87,7 @@ class AdminProductController extends AdminBase
             header("Location: '/admin/product'");
 
         }
-        require_once (ROOT . '/views/admin/product/update.php');
+        require_once (ROOT . '/views/adminLte/product/update.php');
         return true;
     }
 

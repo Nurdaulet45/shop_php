@@ -56,7 +56,7 @@ class UserController
                 $errors[] = 'Неправильный email';
             }
             if (!User::checkPassword($password)) {
-                $errors[] = 'Такой email уже используется';
+                $errors[] = 'Пароль неправильно';
             }
 
 
@@ -79,5 +79,7 @@ class UserController
         header("Location: /");
 
     }
+
+
 
 }

@@ -17,21 +17,25 @@ class CartController
     public function actionDelete($id){
 
         Cart::deleteProduct($id);
+
         header("Location: /cart");
     }
 
     public function actionIndex(){
         $categories = array();
-        $categories = Category::getCategoriesList();
+            $categories = Category::getCategoriesList();
 
-        $productsInCart = false;
+            $productsInCart = false;
 
-        $productsInCart = Cart::getProducts();
+            $productsInCart = Cart::getProducts();
 
-        if (isset($productsInCart)){
-            $productsIds = array_keys($productsInCart);
-            $products = Product::getProductByIds($productsIds);
-            $totalPrice = Cart::getTotalPrice($products);
+            if (count($productsInCart) >= 1){
+//            if (isset($productsInCart)){
+                $productsIds = array_keys($productsInCart);
+
+                $products = Product::getProductByIds($productsIds);
+                $totalPrice = Cart::getTotalPrice($products);
+//            }
         }
         require_once ROOT.'/views/cart/index.php';
         return true;
@@ -57,6 +61,7 @@ class CartController
             $userName = $_POST['userName'];
             $userPhone = $_POST['userPhone'];
             $userComment = $_POST['userComment'];
+            var_dump($_POST['submit']);
 
             // Валидация полей
             $errors = false;
@@ -73,8 +78,10 @@ class CartController
                 $productsInCart = Cart::getProducts();
                 if (User::isGuest()) {
                     $userId = false;
+
                 } else {
                     $userId = User::checkLogged();
+
                 }
 
                 // Сохраняем заказ в БД

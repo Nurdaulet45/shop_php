@@ -33,17 +33,18 @@
                                 <td>Количество, шт</td>
                                 <td>Удалить</td>
                             </tr>
-                            <?php foreach ($products as $product): ?>
-                                <tr>
-                                    <td><?php echo $product['code']; ?></td>
-                                    <td>
-                                        <a href="/product/<?php echo $product['id'];?>"><?php echo $product['name']; ?></a>
-                                    </td>
-                                    <td><?php echo $product['price']; ?></td>
-                                    <td><?php echo $productsInCart[$product['id']]; ?></td>
-                                    <td><a href="/cart/delete/<?php echo $product['id']; ?>" title="Удалить"><i class="fa fa-fw fa-close text-danger">Удалить</i></a></td>
-                                </tr>
-                            <?php endforeach; ?>
+                                <?php foreach ($products as $product): ?>
+                                    <tr>
+                                        <td><?php echo $product['code']; ?></td>
+                                        <td>
+                                            <a href="/product/<?php echo $product['id'];?>"><?php echo $product['name']; ?></a>
+                                        </td>
+                                        <td><?php echo $product['price']; ?></td>
+                                        <td><?php echo $productsInCart[$product['id']]; ?></td>
+                                        <td><a href="/cart/delete/<?php echo $product['id']; ?>" title="Удалить"><i class="fa fa-fw fa-close text-danger">Удалить</i></a></td>
+                                    </tr>
+                                <?php endforeach; ?>
+
                                 <tr>
                                     <td colspan="4">Общая стоимость:</td>
                                     <td><?php echo $totalPrice; ?></td>

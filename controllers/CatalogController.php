@@ -6,12 +6,20 @@ include_once ROOT . '/components/Pagination.php';
 
 class CatalogController
 {
-    public function actionIndex()
+    public function actionIndex($page = 1)
     {
-        $categories = array();
-        $categories = Category::getCategoriesList();
+        $categoryList = array();
+        $categoryList = Category::getCategoriesList();
         $latestProducts = array();
         $latestProducts = Product::getLatestProducts();
+        if (isset($_POST['search'])) {
+            $searchKey = trim($_POST['search']);
+            $products = Product::searchSite($searchKey);
+            return require_once ROOT . '/views/site/search.php';
+        } elseif ($_POST['search'] = '') {
+            return require_once ROOT . '/views/site/search_result.php';
+
+        }
         require_once (ROOT . "/views/catalog/index.php");
 
         return true;

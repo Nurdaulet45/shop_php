@@ -13,12 +13,15 @@
                     <ul></ul>
                     <div class="signup-form">
                         <h2>Вход на сайт</h2>
+                        <div class="register-logo" style="padding-bottom: 10px">Нет аккаунта? <a href="/user/register">Зарегистрироваться</a>
+                        </div>
                         <form action="#" method="post">
                             <input type="email" name="email" placeholder="Email"/>
                             <input type="password" name="password" placeholder="Пароль"/>
                             <input type="submit" name="submit" class="btn btn-default" value="Вход на сайт">
                         </form>
-                    </div>
+
+
 
                     <br/>
                     <br/>

@@ -56,14 +56,14 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/template/adminLte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{ucfirst (Auth::user()->name) }} </span>
+                            <span class="hidden-xs"><?php echo (User::getUserById($_SESSION['user']))['name'];?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <img src="/template/adminLte/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                 <p>
-                                    {{ ucfirst(Auth::user()->name) }}
+                                    <?php echo (User::getUserById($_SESSION['user']))['name'];?>
                                 </p>
 
                             </li>
@@ -73,11 +73,10 @@
                                     <a href="#" class="btn btn-default btn-flat">Профиль</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" onclick="event.preventDefault();
+                                    <a href="/user/logout/" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
                                        class="btn btn-default btn-flat">Выход</a>
                                     <form id="logout-form" action="#" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
                                     </form>
 
                                 </div>
@@ -110,8 +109,8 @@
                 <li class="header">Меню</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li><a href="/"><i class="fa fa-home"></i> <span>В магазин</span></a></li>
-                <li><a href=""><i class="fa fa-user"></i> <span>Главная админки</span></a></li>
-                <li><a href=""><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
+                <li><a href="/admin/"><i class="fa fa-user"></i> <span>Главная админки</span></a></li>
+                <li><a href="/admin/order/"><i class="fa fa-shopping-cart"></i> <span>Заказы</span></a></li>
 
 
 
@@ -122,8 +121,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="">Список категорий</a></li>
-                        <li><a href="">Добавить категорию</a></li>
+                        <li><a href="/admin/category">Список категорий</a></li>
+                        <li><a href="/admin/category/create">Добавить категорию</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -133,11 +132,10 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="">Список товаров</a></li>
-                        <li><a href="">Добавить товар</a></li>
+                        <li><a href="/admin/product/index">Список товаров</a></li>
+                        <li><a href="/admin/product/create">Добавить товар</a></li>
                     </ul>
                 </li>
-                <li><a href=""><i class="fa fa-database"></i> <span>Кэширование</span></a></li>
                 <li class="treeview">
                     <a href="#"><i class="fa fa-users"></i> <span>Пользователи</span>
                         <span class="pull-right-container">
@@ -145,30 +143,8 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="">Список пользователей</a></li>
-                        <li><a href="">Добавить пользователя</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-usd"></i> <span>Валюты</span>
-                        <span class="pull-right-container">
-<i class="fa fa-angle-left pull-right"></i>
-</span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="">Список валют</a></li>
-                        <li><a href="">Добавить валюту</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-filter"></i> <span>Фильтры</span>
-                        <span class="pull-right-container">
-<i class="fa fa-angle-left pull-right"></i>
-</span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="">Группы фильтров</a></li>
-                        <li><a href="">Фильтры</a></li>
+                        <li><a href="/admin/user/index">Список пользователей</a></li>
+                        <li><a href="/admin/user/create">Добавить пользователя</a></li>
                     </ul>
                 </li>
             </ul>

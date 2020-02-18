@@ -30,7 +30,7 @@
 
 <!-- AdminLTE App -->
 <script src="/template/adminlte/dist/js/adminlte.min.js"></script>
-
+<script src="/template/js/my.js"></script>
 <!-- === = ===  -->
 
 </body>

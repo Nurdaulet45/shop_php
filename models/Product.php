@@ -137,6 +137,7 @@ class Product
     }
 
     public static function getProductByIds($idsArray){
+
         $products = array();
         $db = Db::getConnection();
         $idsString = implode(',', $idsArray);
@@ -154,6 +155,8 @@ class Product
         return $products;
 
     }
+
+
 
     public static function createProduct($options){
         $db = Db::getConnection();
@@ -238,5 +241,27 @@ class Product
         return $path . $noImage;
     }
 
+
+    public static function searchSite($searchKey){
+        $db = Db::getConnection();
+        $sql = "SELECT * FROM product WHERE description LIKE '%$searchKey%' LIMIT 10";
+        $result = $db->prepare($sql);
+        $result->bindValue(1, "%$searchKey%", PDO::PARAM_STR);
+        $result->execute();
+
+        $products = array();
+        $i = 0;
+
+        while ($row = $result->fetch()) {
+            $products[$i]['id'] = $row['id'];
+            $products[$i]['name'] = $row['name'];
+            $products[$i]['image'] = $row['image'];
+            $products[$i]['price'] = $row['price'];
+            $products[$i]['is_new'] = $row['is_new'];
+            $i++;
+
+        }
+        return $products;
+    }
 
 }

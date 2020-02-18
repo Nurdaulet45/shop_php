@@ -7,7 +7,7 @@ class AdminCategoryController extends AdminBase
     public function actionIndex(){
         self::checkAdmin();
         $categoriesList = Category::getCategoriesListAdmin();
-        require_once (ROOT . '/views/admin/category/index.php');
+        require_once (ROOT . '/views/adminLte/category/index.php');
         return true;
     }
 
@@ -30,7 +30,7 @@ class AdminCategoryController extends AdminBase
 
             header('Location: /admin/category');
         }
-        require_once ROOT . '/views/admin/category/create.php';
+        require_once ROOT . '/views/adminLte/category/create.php';
         return true;
     }
 
@@ -49,18 +49,16 @@ class AdminCategoryController extends AdminBase
 
         }
 
-        require_once (ROOT . '/views/admin/category/update.php');
+        require_once (ROOT . '/views/adminLte/category/update.php');
         return true;
     }
 
 
     public function actionDelete($id){
         self::checkAdmin();
-        if (isset($_POST['submit'])){
-            Category::deleteCategoryById($id);
-            header('Location: /admin/category');
-        }
-        require_once (ROOT . '/views/admin/category/delete.php');
+        Category::deleteCategoryById($id);
+        header('Location: /admin/category');
+        require_once(ROOT . '/views/adminLte/category/delete.php');
         return true;
     }
 

@@ -144,4 +144,28 @@ class User
         return $result->execute();
     }
 
+
+    public static function createUser($options){
+        $db =Db::getConnection();
+        $sql = 'INSERT INTO user (name,email,role) VALUES (:name, :email,:role)';
+       $result = $db->prepare($sql);
+       $result->bindParam('name', $options['name'], PDO::PARAM_STR);
+       $result->bindParam('email', $options['email'], PDO::PARAM_STR);
+       $result->bindParam('role', $options['role'], PDO::PARAM_INT);
+        if ($result->execute()){
+            return $db->lastInsertId();
+        }
+        return 0;
+    }
+
+    public static function isAdmin()
+    {
+
+        $user = self::getUserById($_SESSION['user']);
+        if ($user['role'] == 'admin') {
+            return true;
+        }
+    }
+
+
 }

@@ -5,7 +5,7 @@ class AdminOrderController extends AdminBase
 {
     public function actionIndex(){
         $ordersList = Order::getOrdersList();
-        require_once (ROOT . '/views/admin/order/index.php');
+        require_once (ROOT . '/views/adminLte/order/index.php');
         return true;
     }
 
@@ -17,7 +17,7 @@ class AdminOrderController extends AdminBase
         $products = Product::getProductByIds($productsIds);
         $totalPrice = Cart::getTotalPrice($products);
 
-        require_once (ROOT . '/views/admin/order/view.php');
+        require_once (ROOT . '/views/adminLte/order/view.php');
         return true;
     }
 
@@ -34,19 +34,18 @@ class AdminOrderController extends AdminBase
             Order::updateOrderById($id, $options);
             header('Location: /admin/order');
         }
-        require_once (ROOT . '/views/admin/order/update.php');
+        require_once (ROOT . '/views/adminLte/order/update.php');
         return true;
     }
 
     public function actionDelete($id){
         self::checkAdmin();
-        if (isset($_POST['submit'])){
-            Order::deleteOrderById($id);
-            header('Location: /admin/order');
 
-        }
-        require_once (ROOT . '/views/admin/order/delete.php');
+        Order::deleteOrderById($id);
+            header('Location: /admin/order');
+        require_once (ROOT . '/views/adminLte/order/delete.php');
         return true;
+
     }
 
 

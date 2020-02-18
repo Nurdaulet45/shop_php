@@ -6,7 +6,7 @@
                 <div class="left-sidebar">
                     <h2>Каталог</h2>
                     <div class="panel-group category-products">
-                        <?php foreach ($categories as $categoryItem) {?>
+                        <?php foreach ($categoryList as $categoryItem) {?>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a href="/category/<?php echo $categoryItem['id'];?>">
@@ -29,7 +29,7 @@
                                     <div class="productinfo text-center">
                                         <img src="<?php echo Product::getImage($productItem['image']);?>" style="width: 200px; height: 150px;" alt="" />
                                         <h2>$<?php echo $productItem['price']; ?></h2>
-                                        <a href="/product/<?php echo $productItem['id'];?>"><?php echo "id:". $productItem['id'];?> <?php echo $productItem['name']; ?></a>
+                                        <p><a href="/product/<?php echo $productItem['id'];?>"><?php echo "id:". $productItem['id'];?> <?php echo $productItem['name']; ?></a></p>
 
                                         <a href="/cart/add/<?php echo $productItem['id'];?>"
                                            class="btn btn-default add-to-cart" data-id="<?php echo $productItem['id']; ?>">

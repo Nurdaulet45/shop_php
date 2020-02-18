@@ -2,6 +2,7 @@
 
 return array(
     'product/([0-9]+)' => 'product/view/$1', // ProductView в ProductController
+    'search' => 'site/search/', // ProductView в ProductController
 
     'cabinet/edit' => 'cabinet/edit',
     'cabinet' => 'cabinet/index',
@@ -13,10 +14,11 @@ return array(
 
     'cart/checkout' => 'cart/checkout',
     'cart/add/([0-9]+)' => 'cart/add/$1', //actionAdd to CartController
-    'cart/delete/([0-9]+)' => 'cart/delete/$1', //actionAdd to CartController
+    'cart/delete/([0-9]+)' => 'cart/delete/$1', //actionDelete to CartController
     'cart/addAjax/([0-9]+)' => 'cart/addAjax/$1', //actionAdd to CartController
     'cart' => 'cart/index',
 
+    'admin/user/create' => 'adminUser/create',
     'admin/user/update/([0-9]+)' => 'adminUser/update/$1',
     'admin/user/delete/([0-9]+)' => 'adminUser/delete/$1',
     'admin/user' => 'adminUser/index',

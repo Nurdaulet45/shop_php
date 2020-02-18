@@ -12,7 +12,10 @@
     <link href="/template/css/price-range.css" rel="stylesheet">
     <link href="/template/css/animate.css" rel="stylesheet">
     <link href="/template/css/main.css" rel="stylesheet">
+    <link href="/template/css/my.css" rel="stylesheet">
     <link href="/template/css/responsive.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--[if lt IE 9]>
     <script src="/template/js/html5shiv.js"></script>
     <script src="/template/js/respond.min.js"></script>
@@ -58,17 +61,39 @@
                     </div>
                 </div>
                 <div class="col-sm-8">
+                    <div class="search-box">
+                        <form action="" method="post">
+
+                        <input type="text" class="search-text" name="search" placeholder="Поиск по сайту ...">
+<!--                        <div class="btn"><a href="/search/"><i class="fa fa-search" style="font-size:24px"></i></i></a></div>-->
+                            <div class="box-footer">
+                                <button type="submit" name="submit" class="btn btn-success">search</button>
+                            </div>
+                        </form>
+
+                    </div>
+
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="<?php if (Cart::countItems() <= 0): echo '/'; else: echo '/cart/'; endif;?>"><i class="fa fa-shopping-cart"></i> Корзина
-                                    <span id="cart-count">(<?php echo Cart::countItems();?>)</span></a></li>
+
+
+
 
                             <?php if (User::isGuest()):?>
-                                <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>
-                                <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход</a></li>
+                                <?php if (User::isAdmin()):?>
+                                    <li><a href="/admin/"><i class="fa fa-user"></i> Панель админ</a></li>
+                                    <?php else:?>
+                                    <li><a href="<?php if (Cart::countItems() <= 0): echo '/'; else: echo '/cart/'; endif;?>"><i class="fa fa-shopping-cart"></i> Корзина
+                                            <span id="cart-count">(<?php echo Cart::countItems();?>)</span></a></li>
+                                    <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>
+                                <?php endif; ?>
+                                    <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход</a></li>
                             <?php else:?>
+                                <li><a href="<?php if (Cart::countItems() <= 0): echo '/'; else: echo '/cart/'; endif;?>"><i class="fa fa-shopping-cart"></i> Корзина
+                                        <span id="cart-count">(<?php echo Cart::countItems();?>)</span></a></li>
                                 <li><a href="/user/login/"><i class="fa fa-lock"></i> Вход</a></li>
                             <?php endif ?>
+
                         </ul>
                     </div>
                 </div>
@@ -102,6 +127,8 @@
                             <li><a href="/contacts/">Контакты</a></li>
                         </ul>
                     </div>
+
+
                 </div>
             </div>
         </div>
